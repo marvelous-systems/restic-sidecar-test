@@ -8,16 +8,19 @@ echo "Performing backup..."
 # 3: backup destination hostname
 # 4: repository path on backup destination
 
-SNAPSHOT_HASH=($(docker run \
+DOCKER_OUTPUT=$(docker run \
 	-v "$2:/restic/key" \
-	-v "$WORKDIR:/payload" \
+	-v "$WORKDIR/data0:/data0" \
+	-v "$WORKDIR/data1:/data1" \
 	-e SFTP_PATH="$4" \
 	-e SFTP_USER="$1" \
 	-e SFTP_HOST="$3" \
 	-e SFTP_PORT=22 \
 	-e RESTIC_PASSWORD=blablub  \
-	-e BACKUP_PATHS=/payload \
-	restic-backup-sidecar 2>&1 | tail -1))
-SNAPSHOT_HASH="${SNAPSHOT_HASH[1]}"
+	-e BACKUP_PATHS=/data0,/data1  \
+	restic-backup-sidecar 2>&1)
+echo "$DOCKER_OUTPUT"
 
-echo "[Debug] The SNAPSHOT_HASH is $SNAPSHOT_HASH"
+RESTORE_SNAPSHOTS=$(echo "$DOCKER_OUTPUT" | grep "saved" | awk "{print \$2}" | tr '\n' ',')
+
+echo "[Debug] The hashes are $RESTORE_SNAPSHOTS"
