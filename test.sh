@@ -11,7 +11,7 @@ cd "$WORKDIR"
 
 . ../scripts/prepare-data.sh
 # . ../scripts/perform-backup.sh
-# . ../scripts/alter-data.sh
+ . ../scripts/alter-data.sh
 # . ../scripts/restore-backup.sh
 # . ../scripts/validate-data.sh
 . ../scripts/cleanup.sh
