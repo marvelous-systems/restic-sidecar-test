@@ -18,3 +18,7 @@ SFTP_PATH       path on SFTP_HOST where the backup is
 ### TODO
 
 spawn sftp host locally using docker to remove need for external sftp
+
+restore backup
+
+validate backup
