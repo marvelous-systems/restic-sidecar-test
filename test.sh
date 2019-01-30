@@ -9,7 +9,7 @@ WORKDIR="$(pwd)/.${PROJECT_NAME}"
 mkdir "$WORKDIR"
 cd "$WORKDIR"
 
-# . ../scripts/prepare-data.sh
+. ../scripts/prepare-data.sh
 # . ../scripts/perform-backup.sh
 # . ../scripts/alter-data.sh
 # . ../scripts/restore-backup.sh
